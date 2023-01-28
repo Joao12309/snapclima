@@ -45,7 +45,7 @@ function getCurrentLocationWeather(lat, lon) {
 
 
 function getCityWeather(cityName) {
-    weatherIcon.src = `/assets/loading-icon.svg`
+    weatherIcon.src = `/loading-icon.svg`
 
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
@@ -64,7 +64,7 @@ function displayWeather(data) {
 
     currentDate.textContent = formatDate(dt);
     cityName.textContent = name;
-    weatherIcon.src = `./assets/${icon}.svg`
+    weatherIcon.src = `./${icon}.svg`
     weatherDescription.textContent = description;
     currentTemperature.textContent = `${Math.round(temp)}ºC`;
     windSpeed.textContent = `${Math.round(speed * 3.6)}km`;

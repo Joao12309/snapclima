@@ -23,11 +23,11 @@ citySearchButton.addEventListener("click", () => {
 
 navigator.geolocation.getCurrentPosition(
     (position) => {
-    let lat = position.coords.latitude
-    let lon = position.coords.longitude
+        let lat = position.coords.latitude
+        let lon = position.coords.longitude
 
-    getCurrentLocationWeather(lat, lon)
-},
+        getCurrentLocationWeather(lat, lon)
+    },
     (err) => {
         if (err.code === 1) {
             alert("Geolocalização negada pelo usuário, busque manualmente por uma cidade através da barra de pesquisa.")
@@ -45,7 +45,7 @@ function getCurrentLocationWeather(lat, lon) {
 
 
 function getCityWeather(cityName) {
-    weatherIcon.src = `/loading-icon.svg`
+    weatherIcon.src = `/assets/loading-icon.svg`
 
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=pt_br&appid=${api_key}`)
@@ -64,7 +64,7 @@ function displayWeather(data) {
 
     currentDate.textContent = formatDate(dt);
     cityName.textContent = name;
-    weatherIcon.src = `./${icon}.svg`
+    weatherIcon.src = `/assets/${icon}.svg`
     weatherDescription.textContent = description;
     currentTemperature.textContent = `${Math.round(temp)}ºC`;
     windSpeed.textContent = `${Math.round(speed * 3.6)}km`;
@@ -76,17 +76,23 @@ function displayWeather(data) {
 }
 
 function formatDate(epochTime) {
-    let date = new Date(epochTime * 1000)
-    let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' })
-    date.toLocaleDateString()
+    let date = new Date(epochTime * 1000);
+    let formattedDate = date.toLocaleDateString('pt-BR', { month: "long", day: 'numeric' });
+    date.toLocaleDateString();
     return `Hoje, ${formattedDate}`
 }
 function formatTime(epochTime) {
-    let date = new Date(epochTime * 1000)
+    let date = new Date(epochTime * 1000);
     let hours = date.getHours();
     let minutes = date.getMinutes();
     return `${hours}:${minutes}`
 
+}
+
+function keyboard() {
+    if (window.event.key == 'Enter') {
+        document.getElementById('city-search-button').click();
+    }
 }
 
 
